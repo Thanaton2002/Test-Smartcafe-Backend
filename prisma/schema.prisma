@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+model Menu {
+  id     Int         @id @default(autoincrement())
+  name   String
+  price  Float
+  img    String?
+  orders OrderItem[]
+}
+
+model Addon {
+  id         Int              @id @default(autoincrement())
+  name       String
+  price      Float
+  orderItems OrderItemAddon[]
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  status      OrderStatus @default(PREPARING)
+  totalPrice  Float       @map("total_price")
+  createdAt   DateTime    @default(now()) @map("create_at")
+  completedAt DateTime?   @map("complete_at")
+  items       OrderItem[]
+}
+
+model OrderItem {
+  id       Int              @id @default(autoincrement())
+  quantity Int
+  Menu     Menu?            @relation(fields: [menuId], references: [id])
+  menuId   Int?             @map("menu_id")
+  Order    Order?           @relation(fields: [orderId], references: [id])
+  orderId  Int?             @map("order_id")
+  note     String?
+  addons   OrderItemAddon[]
+}
+
+model OrderItemAddon {
+  id          Int       @id @default(autoincrement())
+  orderItem   OrderItem @relation(fields: [orderItemId], references: [id])
+  orderItemId Int       @map("order_item_id")
+  addon       Addon     @relation(fields: [addonId], references: [id])
+  addonId     Int       @map("addon_id")
+  quantity    Int       @default(1)
+}
+
+enum OrderStatus {
+  PREPARING
+  COMPLETED
+  CANCELED
+}
