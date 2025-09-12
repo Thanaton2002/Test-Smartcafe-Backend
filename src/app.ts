@@ -4,6 +4,8 @@ import { envConfig } from "./config/env.config";
 import authRouter from "./routes/auth.routes";
 import menuRouter from "./routes/menu.routes";
 import orderRouter from "./routes/order.routes";
+import errorHandlerMiddleware from "./middlewares/errorHandler.middleware";
+import notFoundMiddleware from "./middlewares/notFoundHandler.middleware";
 
 
 const app = express();
@@ -14,6 +16,9 @@ app.use(express.json());
 app.use("/api/authen", authRouter);
 app.use("/api/menu", menuRouter);
 app.use("/api/order", orderRouter);
+
+app.use(errorHandlerMiddleware);
+app.use(notFoundMiddleware);
 
 
 app.listen(port, () => {
