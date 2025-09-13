@@ -12,4 +12,10 @@ export const registerSchema = z.object({
         })
     .transform(({ confirmPassword, ...rest }) => rest)
 
+export const loginSchema = z.object({
+    username: z.string("Username is required"),
+    password: z.string("Password is required"),
+})
+
 export type RegisterDto = z.infer<typeof registerSchema>
+export type LoginDto = z.infer<typeof loginSchema>
