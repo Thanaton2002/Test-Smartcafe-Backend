@@ -17,7 +17,7 @@ model User {
 
 model Menu {
   id     Int         @id @default(autoincrement())
-  name   String
+  name   String      @unique
   price  Float
   img    String?
   orders OrderItem[]

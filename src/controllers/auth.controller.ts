@@ -13,8 +13,8 @@ const authController = {
     // REGISTER FUNCTION
     async register(
         req: Request,
-        res: Response<SuccessApiResponse | ErrorApiResponse
-        >) {
+        res: Response<SuccessApiResponse | ErrorApiResponse>
+    ) {
 
         const data = req.body as RegisterDto;
 
@@ -28,7 +28,7 @@ const authController = {
 
         const user = await authService.createUser(data);
         // console.log(user)
-        
+
         res.status(HttpStatus.CREATED)
             .json({
                 success: true,
@@ -39,10 +39,10 @@ const authController = {
     // LOGIN FUNCTION
     async login(
         req: Request,
-        res: Response<SuccessApiResponse<{ accessToken: string; expiresIn: string }> | ErrorApiResponse
-        >) {
+        res: Response<SuccessApiResponse<{ accessToken: string; expiresIn: string }> | ErrorApiResponse>
+    ) {
 
-        const data = req.body as LoginDto
+        const data = req.body as LoginDto;
 
         const existUser = await authService.findUser(data.username);
         if (!existUser) {
@@ -68,8 +68,8 @@ const authController = {
             .json({
                 success: true,
                 message: "Login Successfully",
-                data: { 
-                    accessToken: token ,
+                data: {
+                    accessToken: token,
                     expiresIn: envConfig.JWT_EXPIRES_IN
                 }
             })

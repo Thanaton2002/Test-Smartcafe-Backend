@@ -4,15 +4,13 @@ const authService = {
     async createUser(registerDto: RegisterDto) {
         return prisma.user.create({
             data: registerDto
-        })
+        });
     },
 
     async findUser(username: string) {
         return prisma.user.findUnique({
-            where: {
-                username
-            }
-        })
+            where: { username }
+        });
     }
 }
 
