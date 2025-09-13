@@ -2,7 +2,7 @@ import { ZodType } from "zod";
 import { NextFunction, Request, Response } from "express";
 
 const validateMiddleware =
-    (schema: ZodType) =>
+    <T>(schema: ZodType<T>) =>
         (req: Request, res: Response, next: NextFunction) => {
             try {
                 req.body = schema.parse(req.body);

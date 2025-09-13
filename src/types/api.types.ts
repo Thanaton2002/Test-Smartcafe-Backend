@@ -4,6 +4,7 @@ export enum HttpStatus {
     BAD_REQUEST = 400,
     INTERNAL_SERVER_ERROR = 500,
     NOT_FOUND = 404,
+    UNAUTHORIZED = 401,
 }
 
 export type SuccessApiResponse<T = any> = { success: true; message?: string; data?: T };
