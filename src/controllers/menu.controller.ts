@@ -10,11 +10,11 @@ import menuServices from "../services/menu.services";
 const menuController = {
     async registerMenu(
         req: Request,
-        res: Response<SuccessApiResponse<{ menu: { name: string, price: number }, image: string | undefined }> | ErrorApiResponse>
+        res: Response<SuccessApiResponse<{ menu: { name: string, price: number }, image: string | undefined }>>
     ) {
         const data = req.body as MenuDto;
 
-        const existMenu = await menuServices.findMenu(data.name);
+        const existMenu = await menuServices.findMenuByname(data.name);
         if (existMenu) {
             return createError(HttpStatus.BAD_REQUEST, "Menu already exists")
         }
@@ -46,7 +46,7 @@ const menuController = {
 
     async getMenu(
         req: Request,
-        res: Response<SuccessApiResponse | ErrorApiResponse>
+        res: Response<SuccessApiResponse>
     ) {
         const menus = await menuServices.getMenus();
 

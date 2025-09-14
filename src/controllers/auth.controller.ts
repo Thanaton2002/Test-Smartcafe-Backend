@@ -13,7 +13,7 @@ const authController = {
     // REGISTER FUNCTION
     async register(
         req: Request,
-        res: Response<SuccessApiResponse | ErrorApiResponse>
+        res: Response<SuccessApiResponse>
     ) {
 
         const data = req.body as RegisterDto;
@@ -39,7 +39,7 @@ const authController = {
     // LOGIN FUNCTION
     async login(
         req: Request,
-        res: Response<SuccessApiResponse<{ accessToken: string; expiresIn: string }> | ErrorApiResponse>
+        res: Response<SuccessApiResponse<{ accessToken: string; expiresIn: string }>>
     ) {
 
         const data = req.body as LoginDto;

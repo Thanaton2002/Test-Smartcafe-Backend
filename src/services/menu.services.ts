@@ -2,9 +2,15 @@ import prisma from "../config/prisma.config";
 import { MenuDto } from "../validators/menu.validates";
 
 const menuServices = {
-    async findMenu(name: string) {
+    async findMenuByname(name: string) {
         return prisma.menu.findUnique({
             where: { name }
+        });
+    },
+
+    async findMenuById(id: number) {
+        return prisma.menu.findUnique({
+            where: { id }
         });
     },
 

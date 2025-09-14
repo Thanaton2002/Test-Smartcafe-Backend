@@ -40,14 +40,15 @@ model Order {
 }
 
 model OrderItem {
-  id       Int              @id @default(autoincrement())
-  quantity Int
-  Menu     Menu?            @relation(fields: [menuId], references: [id])
-  menuId   Int?             @map("menu_id")
-  Order    Order?           @relation(fields: [orderId], references: [id])
-  orderId  Int?             @map("order_id")
-  note     String?
-  addons   OrderItemAddon[]
+  id        Int              @id @default(autoincrement())
+  Menu      Menu?            @relation(fields: [menuId], references: [id])
+  menuId    Int?             @map("menu_id")
+  Order     Order            @relation(fields: [orderId], references: [id])
+  orderId   Int              @map("order_id")
+  note      String?
+  quantity  Int
+  unitPrice Float            @map("unit_price")
+  addons    OrderItemAddon[]
 }
 
 model OrderItemAddon {
@@ -57,6 +58,7 @@ model OrderItemAddon {
   addon       Addon     @relation(fields: [addonId], references: [id])
   addonId     Int       @map("addon_id")
   quantity    Int       @default(1)
+  unitPrice   Float     @map("unit_price")
 }
 
 enum OrderStatus {
