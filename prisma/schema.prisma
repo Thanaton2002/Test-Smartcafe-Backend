@@ -63,6 +63,7 @@ model OrderItemAddon {
 
 enum OrderStatus {
   PREPARING
+  READY
   COMPLETED
   CANCELED
 }

@@ -30,7 +30,8 @@ export const orderController = {
         res.status(HttpStatus.CREATED)
             .json({
                 success: true,
-                message: "Create order successfully"
+                message: "Create order successfully",
+                data: { orderId: createdOrder.id }
             })
     },
 
