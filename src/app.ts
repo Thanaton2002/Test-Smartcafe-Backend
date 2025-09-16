@@ -6,12 +6,18 @@ import menuRouter from "./routes/menu.routes";
 import orderRouter from "./routes/order.routes";
 import errorHandlerMiddleware from "./middlewares/errorHandler.middleware";
 import notFoundMiddleware from "./middlewares/notFoundHandler.middleware";
+import cors from "cors"
 
 
 const app = express();
 const port = envConfig.PORT;
+const allowedOrigins = ["http://localhost:5173", "http://localhost:3000"];
 
 app.use(express.json());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 app.use("/api/authen", authRouter);
 app.use("/api/menu", menuRouter);

@@ -13,7 +13,8 @@ menuRouter.post("/",
     validateMiddleware(menuSchema),
     menuController.registerMenu);
 
-menuRouter.get("/", authenCheck, menuController.getMenu);
+menuRouter.get("/", menuController.getMenu);
+menuRouter.get("/:menuid", menuController.getMenu);
 
 
 export default menuRouter;

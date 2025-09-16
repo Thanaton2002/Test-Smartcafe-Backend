@@ -56,6 +56,24 @@ const menuController = {
                 message: "Menus retrieved successfully",
                 data: { menus }
             })
+    },
+    
+    async findMenu(
+        req: Request,
+        res: Response<SuccessApiResponse>
+    ) {
+        const menuid = Number(req.params.menuid);
+        const menu = await menuServices.findMenuById(menuid);
+        if (!menu) {
+            return createError(HttpStatus.NOT_FOUND, `ไม่พบเมนูที่มี menu id: ${menuid}`);
+        }
+
+        res.status(HttpStatus.OK)
+            .json({
+                success: true,
+                message: "Get menu successfully",
+                data: menu
+            })
     }
 };
 
